@@ -1,8 +1,8 @@
-package br.com.alura.rh.model
+package br.com.hr.model
 
 import java.math.BigDecimal
 import java.time.LocalDate
-import br.com.alura.rh.ValidationException
+import br.com.hr.ValidationException
 import java.math.RoundingMode
 
 class Employee(private var name: String, var cpf: String, private var employeePositionEnum: EmployeePositionEnum, private var wage: BigDecimal) {
