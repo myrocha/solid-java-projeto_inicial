@@ -31,101 +31,8 @@ open class Employee (
 
     )
 
-interface ICalculatePorcent{
-    //fun setIncrease();
-    fun compareLastReadjst():Boolean
-    fun readjustment(increase:BigDecimal);
-    fun compareReadjustment():Boolean;
-    fun addInWage(): BigDecimal;
-
-}
-
-class Terceirizado(employee: Employee): ICalculatePorcent{
-
-    lateinit var readjusmentPercent:BigDecimal;
-    val READJUST_LIMIT ="0.4";
-     val employee = employee;
-
-   lateinit var increased: BigDecimal;
-
-    override fun compareLastReadjst(): Boolean {
-        val hoje = LocalDateTime.now();
-        val meses: Long = employee.lastReadjustment.until(hoje, ChronoUnit.MONTHS)
-
-        if(meses >6){
-            return true;
-        }
-        return false;
-    }
-
-
-    override fun readjustment(increase:BigDecimal) {
-        increased = increase;
-        readjusmentPercent = increase.divide(employee.wage, RoundingMode.HALF_UP);
-
-    }
-
-    override fun compareReadjustment():Boolean {
-        if (readjusmentPercent.compareTo(BigDecimal(READJUST_LIMIT)) > 0) {
-            return false;
-            throw ValidationException("Reajuste nao pode ser superior a 40% do salario!")
-        }
-        return true;
-    }
-
-    override fun addInWage():BigDecimal {
-        if(compareReadjustment() && compareLastReadjst()){
-           return employee.wage.add(increased);
-        }
-        return BigDecimal(0);
-    }
-
-}
-
-class CLT(employee: Employee): ICalculatePorcent{
-
-    lateinit var readjusmentPercent:BigDecimal;
-
-    val READJUST_LIMIT ="0.4";
-
-    val employee = employee;
-
-    lateinit var increased: BigDecimal;
-    override fun compareLastReadjst(): Boolean {
-        val hoje = LocalDateTime.now();
-        val meses: Long = employee.lastReadjustment.until(hoje, ChronoUnit.MONTHS)
-
-        if(meses >6){
-            return true;
-        }
-        return false;
-    }
-
-    override fun readjustment(increase:BigDecimal) {
-        increased = increase;
-        readjusmentPercent = increase.divide(employee.wage, RoundingMode.HALF_UP);
-
-    }
-
-    override fun compareReadjustment():Boolean {
-        if (readjusmentPercent.compareTo(BigDecimal(READJUST_LIMIT)) > 0) {
-            return false;
-            throw ValidationException("Reajuste nao pode ser superior a 40% do salario!")
-        }
-        return true;
-    }
-
-    override fun addInWage():BigDecimal {
-        if(compareReadjustment() && compareLastReadjst()){
-            return employee.wage.add(increased);
-        }
-        return BigDecimal(0);
-    }
-
-}
-
 fun main() {
-    val temp = Employee("Isa","xxxx",EmployeePositionEnum.ANALISTA,BigDecimal(2000), LocalDate.now())
+    /*val temp = Employee("Isa","xxxx",EmployeePositionEnum.ANALISTA,BigDecimal(2000), LocalDate.now())
     val perm = Employee("Bel","xxxx",EmployeePositionEnum.ESPECIALISTA,BigDecimal(4000), LocalDate.now())
 
     val terc = Terceirizado(temp);
@@ -135,5 +42,5 @@ fun main() {
     terc.addInWage();
 
     clt.readjustment(BigDecimal(0.4));
-    clt.addInWage();
+    clt.addInWage();*/
 }
